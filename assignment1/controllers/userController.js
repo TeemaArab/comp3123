@@ -40,11 +40,23 @@ User.findOne({email})
 
 // to get all users
 exports.getAllUsers = (req, res) => {
-    User.find()  // find all users in the database
+    const { username, email, password } = req.query;
+
+    // Build query object based on available query parameters
+    let query = {};
+    if (username) query.username = username;
+    if (email) query.email = email;
+    if (password) query.password = password;
+
+    // Use the query object to find users that match
+    User.find(query)  
     .then(users => {
-        res.status(200).json(users); // return users if found
+        if (users.length === 0) {
+            return res.status(404).json({ message: 'No users found matching the criteria' });
+        }
+        res.status(200).json(users); // return matching users if found
     })
     .catch(error => {
-        res.status(500).json({message: 'Error fetching users', error}); // handle errors
+        res.status(500).json({ message: 'Error fetching users', error }); // handle errors
     });
 };
