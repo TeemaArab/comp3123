@@ -6,9 +6,9 @@ function StudentInformation({studentID, studentName, college}) {
         <div>
             <h1>Welcome to Fullstack Development -1</h1>
             <h2>React JS Programming Week09 Lab Exercise</h2>
-            <p>{studentID}</p>
-            <p>{studentName}</p>
-            <p>{college}</p>
+            <h3>{studentID}</h3>
+            <h3>{studentName}</h3>
+            <h3>{college}</h3>
         </div>
     );
 }
